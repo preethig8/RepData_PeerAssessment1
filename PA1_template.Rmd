@@ -1,10 +1,10 @@
 ---
 title: "Reproducible Research Assignment 1"
-output: html_document
+output: md_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,fig.path="figure/")
 ```
 
 
@@ -67,7 +67,13 @@ Note that there are a number of days/intervals where there are missing values (c
 sum(is.na(data))
 ```
 2.) Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
+
+    Inorder to fill the missing values, I am using the mean for that 5-minute interval time period.
+
 3.) Create a new dataset that is equal to the original dataset but with the missing data filled in.
+
+    To fill the missing values, I am using the mean of 5-minute interval.In each day there are a total of 288 intervals considered. So, looping for each interval for all the dates and assigning the mean of that particular interval for missing values.
+    
 ```{r}
 new_data <- data
 record <- 1
@@ -82,6 +88,8 @@ for(day in 1:length(unique(data$date)) ) {
 ```
 
 4.) Make a histogram of the total number of steps taken each day 
+Histogram of total no of steps taken per day after imputing missing values
+
 ```{r}
 new_total_steps_per_day <- aggregate(steps ~ date, data=new_data, FUN=sum)
 histogram(new_total_steps_per_day$steps,ylab = "Frequency", xlab="Total steps per day",
@@ -97,7 +105,7 @@ mean_diff <- mean(new_total_steps_per_day$steps) - mean(total_steps_per_day$step
 median_diff <- median(new_total_steps_per_day$steps) - median(total_steps_per_day$steps)
 ```
 
-The new mean differs in `r mean_diff` from the one calculated in the first part of assignment and the median differs in `r median_diff` from the one calculated in the first part of assignment.
+    The new mean differs in `r mean_diff` from the one calculated in the first part of assignment and the median differs in `r median_diff` from the one calculated in the first part of assignment.
 
 ##Are there differences in activity patterns between weekdays and weekends?
 For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.

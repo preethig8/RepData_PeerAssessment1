@@ -32,7 +32,7 @@ total number of steps taken each day
     histogram(total_steps_per_day$steps, ylab="Frequency", xlab="Total no. of steps per day",
               breaks=seq(0,25000, by=500), xlim=c(0,25000))
 
-![](PA1_template_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+![](figure/unnamed-chunk-4-1.png)
 
 3.) Calculate and report the mean and median of the total number of
 steps taken per day
@@ -54,7 +54,7 @@ What is the average daily activity pattern?
     plot(mean_steps_per_interval, type="l",ylab="Average Steps taken", xlab="5-Minute Interval",
          xlim=c(0,2500),col="red")
 
-![](PA1_template_files/figure-markdown_strict/unnamed-chunk-6-1.png)
+![](figure/unnamed-chunk-6-1.png)
 
 2.)Which 5-minute interval, on average across all the days in the
 dataset, contains the maximum number of steps?
@@ -80,8 +80,14 @@ dataset (i.e. the total number of rows with NAs)
 2.) Devise a strategy for filling in all of the missing values in the
 dataset. The strategy does not need to be sophisticated. For example,
 you could use the mean/median for that day, or the mean for that
-5-minute interval, etc. 3.) Create a new dataset that is equal to the
-original dataset but with the missing data filled in.
+5-minute interval, etc.
+
+    Inorder to fill the missing values, I am using the mean for that 5-minute interval time period.
+
+3.) Create a new dataset that is equal to the original dataset but with
+the missing data filled in.
+
+    To fill the missing values, I am using the mean of 5-minute interval.In each day there are a total of 288 intervals considered. So, looping for each interval for all the dates and assigning the mean of that particular interval for missing values.
 
     new_data <- data
     record <- 1
@@ -95,12 +101,14 @@ original dataset but with the missing data filled in.
     }
 
 4.) Make a histogram of the total number of steps taken each day
+Histogram of total no of steps taken per day after imputing missing
+values
 
     new_total_steps_per_day <- aggregate(steps ~ date, data=new_data, FUN=sum)
     histogram(new_total_steps_per_day$steps,ylab = "Frequency", xlab="Total steps per day",
               breaks=seq(0,25000, by=500),xlim=c(0,25000))
 
-![](PA1_template_files/figure-markdown_strict/unnamed-chunk-10-1.png)
+![](figure/unnamed-chunk-10-1.png)
 
 5.) Calculate and report the mean and median total number of steps taken
 per day. Do these values differ from the estimates from the first part
@@ -118,9 +126,7 @@ estimates of the total daily number of steps?
     mean_diff <- mean(new_total_steps_per_day$steps) - mean(total_steps_per_day$steps)
     median_diff <- median(new_total_steps_per_day$steps) - median(total_steps_per_day$steps)
 
-The new mean differs in 0 from the one calculated in the first part of
-assignment and the median differs in 1.1886792 from the one calculated
-in the first part of assignment.
+    The new mean differs in 0 from the one calculated in the first part of assignment and the median differs in 1.1886792 from the one calculated in the first part of assignment.
 
 Are there differences in activity patterns between weekdays and weekends?
 -------------------------------------------------------------------------
@@ -150,4 +156,4 @@ should look like using simulated data.
     xyplot(steps ~ interval |day_of_week, data=new_mean_steps_by_interval,type="l",ylab="Number of steps",
            xlab="Time Interval",xlim=c(0,2500),ylim=c(0,250),layout=c(1,2))
 
-![](PA1_template_files/figure-markdown_strict/unnamed-chunk-13-1.png)
+![](figure/unnamed-chunk-13-1.png)

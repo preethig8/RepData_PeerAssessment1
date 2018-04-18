@@ -163,7 +163,10 @@ plot(mean_steps_per_interval, type=&quot;l&quot;,ylab=&quot;Average Steps taken&
 <p>1.) Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)</p>
 <pre class="r"><code>sum(is.na(data))</code></pre>
 <pre><code>## [1] 2304</code></pre>
-<p>2.) Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc. 3.) Create a new dataset that is equal to the original dataset but with the missing data filled in.</p>
+<p>2.) Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.</p>
+<pre><code>Inorder to fill the missing values, I am using the mean for that 5-minute interval time period.</code></pre>
+<p>3.) Create a new dataset that is equal to the original dataset but with the missing data filled in.</p>
+<pre><code>To fill the missing values, I am using the mean of 5-minute interval.In each day there are a total of 288 intervals considered. So, looping for each interval for all the dates and assigning the mean of that particular interval for missing values.</code></pre>
 <pre class="r"><code>new_data &lt;- data
 record &lt;- 1
 for(day in 1:length(unique(data$date)) ) {
@@ -174,7 +177,7 @@ for(day in 1:length(unique(data$date)) ) {
     record &lt;- record +1
   }
 }</code></pre>
-<p>4.) Make a histogram of the total number of steps taken each day</p>
+<p>4.) Make a histogram of the total number of steps taken each day Histogram of total no of steps taken per day after imputing missing values</p>
 <pre class="r"><code>new_total_steps_per_day &lt;- aggregate(steps ~ date, data=new_data, FUN=sum)
 histogram(new_total_steps_per_day$steps,ylab = &quot;Frequency&quot;, xlab=&quot;Total steps per day&quot;,
           breaks=seq(0,25000, by=500),xlim=c(0,25000))</code></pre>
@@ -186,7 +189,7 @@ histogram(new_total_steps_per_day$steps,ylab = &quot;Frequency&quot;, xlab=&quot
 <pre><code>## [1] 10766.19</code></pre>
 <pre class="r"><code>mean_diff &lt;- mean(new_total_steps_per_day$steps) - mean(total_steps_per_day$steps)
 median_diff &lt;- median(new_total_steps_per_day$steps) - median(total_steps_per_day$steps)</code></pre>
-<p>The new mean differs in 0 from the one calculated in the first part of assignment and the median differs in 1.1886792 from the one calculated in the first part of assignment.</p>
+<pre><code>The new mean differs in 0 from the one calculated in the first part of assignment and the median differs in 1.1886792 from the one calculated in the first part of assignment.</code></pre>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
