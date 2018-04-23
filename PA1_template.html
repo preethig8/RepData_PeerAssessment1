@@ -126,7 +126,7 @@ $(document).ready(function () {
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>
 <p>1.) Load the data (i.e. read.csv())</p>
-<pre class="r"><code>data_file &lt;- unzip(&quot;C://Users//pgnanesh.ORADEV//Reproducible_Research//activity.zip&quot;)
+<pre class="r"><code>data_file &lt;- unzip(&quot;C://Users//pgnanesh.ORADEV//Documents//coursera//Reproducible_Research//activity.zip&quot;)
 data &lt;- read.csv(data_file, stringsAsFactors = FALSE, na.strings = &quot;NA&quot;)</code></pre>
 <p>2.) Process/transform the data (if necessary) into a format suitable for your analysis</p>
 <pre class="r"><code>data$date &lt;- as.Date(data$date,format = &quot;%Y-%m-%d&quot;)</code></pre>
@@ -144,7 +144,7 @@ histogram(total_steps_per_day$steps, ylab=&quot;Frequency&quot;, xlab=&quot;Tota
 <p>3.) Calculate and report the mean and median of the total number of steps taken per day</p>
 <pre class="r"><code>mean_steps &lt;-mean(total_steps_per_day$steps)
 median_steps &lt;- median(total_steps_per_day$steps)</code></pre>
-<p>1.076618910^{4} is the mean of total steps per day and 10765 is the median of total steps per day.</p>
+<pre><code>1.0766189\times 10^{4} is the mean of total steps per day and 10765 is the median of total steps per day.</code></pre>
 </div>
 <div id="what-is-the-average-daily-activity-pattern" class="section level2">
 <h2>What is the average daily activity pattern?</h2>
